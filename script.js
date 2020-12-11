@@ -30,37 +30,42 @@ window.addEventListener("load", function() {
      let castFuelLevel = Number(fuelLevelInput.value);
      let castCargoMass = Number(cargoMassInput.value);
 
+     let numberPilotName = Number(pilotNameInput.value)
+      let numberCopilotName = Number(copilotNameInput.value)
+
 
      event.preventDefault();
  
      if (pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === "") {
-         alert("All fields are required!");
+         return alert("All fields are required!");
      } else if (isNaN(castFuelLevel)) {
-         alert("Invalid entry!");
+         return alert("Invalid entry!");
      } else if (isNaN(castCargoMass)) {
-         alert("Invalid entry!");
-     } else if (typeof pilotNameInput.value !== 'string' || typeof copilotNameInput.value !== 'string') {
-         alert("Invalid entry!");
-     } else if (castFuelLevel < 10000) {
-         document.getElementById("launchStatus").innerHTML = "Not ready for launch!";
-         document.getElementById("launchStatus").style.color = "red";
-         document.getElementById("fuelStatus").innerHTML = "Insufficient fuel level"
-         document.getElementById("faultyItems").style.visibility = 'visible';
-         document.getElementById("pilotStatus").innerHTML = `${pilotNameInput.value} is ready`;
-         document.getElementById("copilotStatus").innerHTML = `${copilotNameInput.value} is ready`; 
-     } else if (castCargoMass > 10000) {
-         document.getElementById("launchStatus").innerHTML = "Not ready for launch!";
-         document.getElementById("launchStatus").style.color = "red";
-         document.getElementById("cargoStatus").innerHTML = "Waaaay too much mass"
-         document.getElementById("faultyItems").style.visibility = 'visible';
-         document.getElementById("pilotStatus").innerHTML = `${pilotNameInput.value} is ready`;
-         document.getElementById("copilotStatus").innerHTML = `${copilotNameInput.value} is ready`; 
-     } else {
-        document.getElementById("pilotStatus").innerHTML = `${pilotNameInput.value} is ready`;
-        document.getElementById("copilotStatus").innerHTML = `${copilotNameInput.value} is ready`; 
+         return alert("Invalid entry!");
+     } else if (!isNaN(pilotNameInput.value) || !isNaN(copilotNameInput.value)){
+         return alert("Invalid entry!");
+     } 
+
+      document.getElementById("copilotStatus").innerHTML = `${copilotNameInput.value} is ready`; 
+      document.getElementById("pilotStatus").innerHTML = `${pilotNameInput.value} is ready`;
+
+      if (castCargoMass <= 10000 && castFuelLevel >= 10000) {
         document.getElementById("launchStatus").innerHTML = "Shuttle is ready for launch!";
         document.getElementById("launchStatus").style.color = "green";
-     }
+        return;
+      }
+      
+      document.getElementById("launchStatus").innerHTML = "Not ready for launch!";
+      document.getElementById("launchStatus").style.color = "red";
+      document.getElementById("faultyItems").style.visibility = 'visible';
+
+      if (castFuelLevel < 10000) {
+         document.getElementById("fuelStatus").innerHTML = "Insufficient fuel level"
+      }
+
+     if (castCargoMass > 10000) {
+         document.getElementById("cargoStatus").innerHTML = "Waaaay too much mass"
+     } 
    });
  });
 
