@@ -18,7 +18,6 @@ window.addEventListener("load", function() {
    });
 
 
-
    let form = document.querySelector("form");
  //   let button = document.getElementById("formSubmit");
    form.addEventListener("submit", function(event) {
@@ -28,11 +27,9 @@ window.addEventListener("load", function() {
      let cargoMassInput = document.querySelector("input[name=cargoMass]");
      
      let castFuelLevel = Number(fuelLevelInput.value);
+     console.log("FUEL LEVEL", castFuelLevel)
      let castCargoMass = Number(cargoMassInput.value);
-
-     let numberPilotName = Number(pilotNameInput.value)
-      let numberCopilotName = Number(copilotNameInput.value)
-
+     console.log("CARGO MASS", castCargoMass)
 
      event.preventDefault();
  
@@ -52,6 +49,8 @@ window.addEventListener("load", function() {
       if (castCargoMass <= 10000 && castFuelLevel >= 10000) {
         document.getElementById("launchStatus").innerHTML = "Shuttle is ready for launch!";
         document.getElementById("launchStatus").style.color = "green";
+        document.getElementById("fuelStatus").innerHTML = "Fuel level high enough for launch"
+        document.getElementById("cargoStatus").innerHTML = "Cargo mass low enough for launch"
         return;
       }
       
@@ -61,22 +60,11 @@ window.addEventListener("load", function() {
 
       if (castFuelLevel < 10000) {
          document.getElementById("fuelStatus").innerHTML = "Insufficient fuel level"
-      }
+      } else document.getElementById("fuelStatus").innerHTML = "Fuel level high enough for launch"
 
-     if (castCargoMass > 10000) {
+      if (castCargoMass > 10000) {
          document.getElementById("cargoStatus").innerHTML = "Waaaay too much mass"
-     } 
+      } else document.getElementById("cargoStatus").innerHTML = "Cargo mass low enough for launch"
+
    });
  });
-
-/* This block of code shows how to format the HTML once you fetch some planetary JSON!
-<h2>Mission Destination</h2>
-<ol>
-   <li>Name: ${}</li>
-   <li>Diameter: ${}</li>
-   <li>Star: ${}</li>
-   <li>Distance from Earth: ${}</li>
-   <li>Number of Moons: ${}</li>
-</ol>
-<img src="${}">
-*/
